@@ -1,7 +1,7 @@
 export const userInputs = [
   {
-    id: "username",
-    label: "Username",
+    id: "name",
+    label: "Tên",
     type: "text",
     placeholder: "john_doe",
   },
@@ -11,6 +11,7 @@ export const userInputs = [
     type: "email",
     placeholder: "john_doe@gmail.com",
   },
+
   {
     id: "phone",
     label: "Phone",
@@ -19,35 +20,47 @@ export const userInputs = [
   },
   {
     id: "password",
-    label: "Password",
+    label: "Mật khẩu",
     type: "password",
   },
   {
     id: "country",
-    label: "Country",
+    label: "Quốc gia",
     type: "text",
-    placeholder: "USA",
+    placeholder: "Việt Nam",
   },
   {
     id: "city",
-    label: "City",
+    label: "Thành phố",
     type: "text",
-    placeholder: "USA",
+    placeholder: "Hà Nội",
   },
+  {
+    id: "sex",
+    label: "Giới tính",
+    type: "text",
+    placeholder: "john_doe@gmail.com",
+  },
+  {
+    id: "age",
+    label: "Tuổi",
+    type: "text",
+    placeholder: "23",
+  }
 ];
 
 export const productInputs = [
   {
-    id: 1,
-    label: "Title",
+    id: "title",
+    label: "Tiêu đề",
     type: "text",
     placeholder: "Apple Macbook Pro",
   },
   {
-    id: 2,
-    label: "Description",
-    type: "text",
-    placeholder: "Description",
+    id: "description",
+    label: "Mô tả",
+    type: "textarea",
+    placeholder: "Mô tả",
   },
   {
     id: 3,
@@ -56,10 +69,10 @@ export const productInputs = [
     placeholder: "Computers",
   },
   {
-    id: 4,
+    id: "price",
     label: "Price",
     type: "text",
-    placeholder: "100",
+    placeholder: "10000000",
   },
   {
     id: 5,
@@ -71,53 +84,97 @@ export const productInputs = [
 
 export const houseInputs = [
   {
-    id: "name",
-    label: "Name",
+    id: "title",
+    label: "Tiêu đề",
+    type: "text",
+    placeholder: "Căn nhà cực cháy.......",
+  },
+
+  {
+    id: "description",
+    label: "Mô tả",
     type: "text",
     placeholder: "My House",
   },
   {
-    id: "type",
+    id: "houseType",
     label: "Type",
     type: "text",
-    placeholder: "house",
+    placeholder: "Loại nhà ở",
   },
   {
-    id: "city",
-    label: "City",
+    id: "numFloors",
+    label: "Số tầng",
     type: "text",
-    placeholder: "New York",
+    placeholder: "3",
   },
   {
-    id: "address",
-    label: "Address",
+    id: "numBedRooms",
+    label: "Số phòng ngủ",
     type: "text",
     placeholder: "elton st, 216",
   },
   {
-    id: "distance",
-    label: "Distance from City Center",
+    id: "squaredMeterArea",
+    label: "Diện tích",
     type: "text",
     placeholder: "500",
   },
   {
-    id: "title",
-    label: "Title",
+    id: "lengthMeter",
+    label: "Chiều dài",
     type: "text",
-    placeholder: "The best House",
+    placeholder: "32",
   },
   {
-    id: "desc",
-    label: "Description",
+    id: "widthMeter",
+    label: "Chiều rộng",
     type: "text",
-    placeholder: "description",
+    placeholder: "Chiều rộng",
   },
   {
-    id: "cheapestPrice",
-    label: "Price",
+    id: "ward",
+    label: "Phường/Xã",
     type: "text",
-    placeholder: "100",
+    placeholder: "Hà Cầu",
   },
+  {
+    id: "district",
+    label: "Quận/Huyện",
+    type: "text",
+    placeholder: "Hà Đông",
+  },
+
+  {
+    id: "certificateOfland",
+    label: "Sổ đỏ",
+    type: "text",
+    placeholder: "1",
+  },
+  {
+    id: "price",
+    label: "Gía tiền",
+    type: "text",
+    placeholder: "3000000",
+  },
+  {
+    id: "status",
+    label: "Trạng thái",
+    type: "text",
+    placeholder: "Mới",
+  },
+  // {
+  //   id: "address",
+  //   label: "Địa chỉ cụ thể",
+  //   type: "text",
+  //   placeholder: "Hà Nội",
+  // },
+  // {
+  //   id: "contactPhone",
+  //   label: "Thông tin liên hệ",
+  //   type: "text",
+  //   placeholder: "+84 987 524 552",
+  // },
 ];
 
 export const roomInputs = [
@@ -148,29 +205,11 @@ export const roomInputs = [
 ];
 export const postInputs = [
   {
-    id: "title",
-    label: "Title",
+    id: "description",
+    label: "Mô tả bài viết",
     type: "text",
-    placeholder: "2 bed room",
-  },
-  {
-    id: "desc",
-    label: "Description",
-    type: "text",
-    placeholder: "King size bed, 1 bathroom",
-  },
-  {
-    id: "price",
-    label: "Price",
-    type: "number",
-    placeholder: "100",
-  },
-  {
-    id: "maxPeople",
-    label: "Max People",
-    type: "number",
-    placeholder: "2",
-  },
+    placeholder: "bạn đang nghĩ gì",
+  }
 ];
 
 export const depositInputs = [
@@ -181,21 +220,62 @@ export const depositInputs = [
     placeholder: "2 bed room",
   },
   {
+    id: "userId",
+    label: "ID Người mua",
+    type: "text",
+    placeholder: "1",
+  },
+  {
     id: "customerName",
     label: "customerName",
     type: "text",
-    placeholder: "King size bed, 1 bathroom",
+    placeholder: "Hoàng Mạnh Hải",
   },
   {
-    id: "price",
-    label: "Price",
-    type: "number",
-    placeholder: "100",
+    id: "customerEmail",
+    label: "customerEmail",
+    type: "text",
+    placeholder: "vanictk62@gmail.com",
   },
   {
-    id: "maxPeople",
-    label: "Max People",
-    type: "number",
-    placeholder: "2",
+    id: "customerPhone",
+    label: "customerPhone",
+    type: "text",
+    placeholder: "0954 445 554",
   },
+  {
+    id: "customerAddress",
+    label: "customerAddress",
+    type: "text",
+    placeholder: "Hà Nội",
+  },
+  {
+    id: "paymentMethod",
+    label: "Phương thức thanh toán",
+    type: "text",
+    placeholder: "Card Visa",
+  },
+  {
+    id: "status",
+    label: "Trạng thái",
+    type: "text",
+    placeholder: "Thành công",
+  },
+   {
+    id: "ownerName",
+    label: "ownerName",
+    type: "text",
+    placeholder: "Tên chủ sở hữu",
+  },
+   {
+    id: "ownerPhone",
+    label: "ownerPhone",
+    type: "text",
+    placeholder: "Số điện thoại chủ sở hữu",
+  }, {
+    id: "productId",
+    label: "productId",
+    type: "text",
+    placeholder: "ID sản phẩm",
+  }
 ];

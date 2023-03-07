@@ -2,51 +2,63 @@ import "./navbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import Button from '@mui/material/Button'
+import { SearchContext } from "../../context/SearchContext";
 
 const Navbar = () => {
-  const { dispatch } = useContext(DarkModeContext);
+  // const { dispatch } = useContext(DarkModeContext);
+  const { dispatch: searchDispatch } = useContext(SearchContext);
+  const {user} = useContext(AuthContext)
+  const [searchNav,setSearchNav] = useState("") 
+  const {search} = useContext(SearchContext)
+  const [query, setQuery] = useState("");
+  // console.log("Seacrhhhhhhhhhhhhh",search);
+
+  const handleSearchClick = ()=> {
+    console.log("MMMM")
+    searchDispatch({ type: "NEW_SEARCH", payload: {search: query}});
+  }
 
   return (
     <div className="navbar">
       <div className="wrapper">
         <div className="search">
-          <input type="text" placeholder="Search..." />
-          <SearchOutlinedIcon />
+          <input type="text" placeholder="Tìm kiếm ..."  onChange={(e)=>{
+            // console.log("e",e);
+            setQuery(e.target.value)
+            console.log(query);
+          }
+         
+            }/>
+         
+          <Button
+            variant="text"
+            color="primary"
+            startIcon={<SearchOutlinedIcon />}
+            onClick ={handleSearchClick}
+            
+          >
+            
+          </Button>
+          
         </div>
         <div className="items">
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
-            English
+            Tiếng Việt
           </div>
-          <div className="item">
+          {/* <div className="item">
             <DarkModeOutlinedIcon
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
             />
-          </div>
-          <div className="item">
-            <FullscreenExitOutlinedIcon className="icon" />
-          </div>
-          <div className="item">
-            <NotificationsNoneOutlinedIcon className="icon" />
-            <div className="counter">1</div>
-          </div>
-          <div className="item">
-            <ChatBubbleOutlineOutlinedIcon className="icon" />
-            <div className="counter">2</div>
-          </div>
-          <div className="item">
-            <ListOutlinedIcon className="icon" />
-          </div>
+          </div> */}
           <div className="item">
             <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src={`${process.env.REACT_APP_MEDIA_URL}/${user.avatar}`}
               alt=""
               className="avatar"
             />

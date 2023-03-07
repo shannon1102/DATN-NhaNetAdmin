@@ -4,20 +4,21 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import LibraryBooksOutlinedIcon  from "@mui/icons-material/LibraryBooksOutlined";
 
-const Widget = ({ type }) => {
+const Widget = ({ type, num}) => {
   let data;
 
   //temporary
-  const amount = 100;
+  const amount = num;
   const diff = 20;
 
   switch (type) {
     case "user":
       data = {
-        title: "USERS",
+        title: "Người dùng",
         isMoney: false,
-        link: "See all users",
+        // link: "See all users",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -29,11 +30,11 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "order":
+    case "deposit":
       data = {
-        title: "ORDERS",
+        title: "Giao dịc đặt cọc",
         isMoney: false,
-        link: "View all orders",
+        // link: "View all deposits",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -45,24 +46,24 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earning":
+    case "post":
       data = {
-        title: "EARNINGS",
-        isMoney: true,
-        link: "View net earnings",
+        title: "Bài chia sẻ",
+        isMoney: false,
+        // link: "View net posts",
         icon: (
-          <MonetizationOnOutlinedIcon
+          <LibraryBooksOutlinedIcon
             className="icon"
             style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
           />
         ),
       };
       break;
-    case "balance":
+    case "product":
       data = {
-        title: "BALANCE",
-        isMoney: true,
-        link: "See details",
+        title: "Sản phẩm",
+        isMoney: false,
+        // link: "See details",
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="icon"
@@ -88,10 +89,6 @@ const Widget = ({ type }) => {
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
         {data.icon}
       </div>
     </div>

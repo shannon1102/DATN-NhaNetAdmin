@@ -2,10 +2,29 @@ import "./new.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const New = ({ inputs, title }) => {
+  const {user}  = useContext(AuthContext);
+
+  const opts = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  opts.headers.Authorization = "Bearer " + user.token;
+
+  const fileOpts = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  fileOpts.headers.Authorization = "Bearer " + user.token;
+
+  const navigate = useNavigate();
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
 
@@ -16,22 +35,23 @@ const New = ({ inputs, title }) => {
   const handleClick = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("file", file);
-    data.append("upload_preset", "upload");
+    data.append("files", file);
+
     try {
       const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/lamadev/image/upload",
-        data
+          `${process.env.REACT_APP_MEDIA_URL}`,
+        data,fileOpts
       );
 
-      const { url } = uploadRes.data;
+      const mediaId  = uploadRes.data.result[0].id;
 
       const newUser = {
         ...info,
-        img: url,
+        avatar: mediaId,
       };
 
-      await axios.post("/auth/register", newUser);
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/register`, newUser,opts);
+      navigate("/users")
     } catch (err) {
       console.log(err);
     }

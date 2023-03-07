@@ -7,6 +7,7 @@ import { houseInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const NewProduct= () => {
   const { user } = useContext(AuthContext);
@@ -15,6 +16,16 @@ const NewProduct= () => {
       "Content-Type": "application/json",
     },
   };
+  opts.headers.Authorization = "Bearer " + user.token;
+
+  const fileOpts = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  fileOpts.headers.Authorization = "Bearer " + user.token;
+  const navigate = useNavigate();
+
   opts.headers.Authorization = "Bearer " + user.token;
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
@@ -42,25 +53,34 @@ const NewProduct= () => {
       const list = await Promise.all(
         Object.values(files).map(async (file) => {
           const data = new FormData();
-          data.append("file", file);
+          data.append("files", file);
           data.append("upload_preset", "upload");
           const uploadRes = await axios.post(
-            "https://api.cloudinary.com/v1_1/lamadev/image/upload",
-            data
+          `${process.env.REACT_APP_MEDIA_URL}`,
+          data,fileOpts
           );
 
-          const { url } = uploadRes.data;
-          return url;
+          const mediaId= uploadRes.data.result[0].id;
+          return mediaId;
         })
       );
+      let newProduct ={}
+      if(list.length>0) {
+        newProduct = {
+          ...info,
+          featureImageId: list[0],
+          media: list,
+        };
+      }else {
+        newProduct = {
+          ...info
+        };
+      }
 
-      const newProduct= {
-        ...info,
-        rooms,
-        photos: list,
-      };
+      
 
-      await axios.post("/products", newProduct);
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/products`, newProduct,opts);
+      navigate("/products")
     } catch (err) {console.log(err)}
   };
   return (
@@ -108,14 +128,14 @@ const NewProduct= () => {
                   />
                 </div>
               ))}
-              <div className="formInput">
+              {/* <div className="formInput">
                 <label>Featured</label>
                 <select id="featured" onChange={handleChange}>
                   <option value={false}>No</option>
                   <option value={true}>Yes</option>
                 </select>
-              </div>
-              <div className="selectRooms">
+              </div> */}
+              {/* <div className="selectRooms">
                 <label>Rooms</label>
                 <select id="rooms" multiple onChange={handleSelect}>
                   {loading
@@ -127,7 +147,7 @@ const NewProduct= () => {
                         </option>
                       ))}
                 </select>
-              </div>
+              </div> */}
               <button onClick={handleClick}>Send</button>
             </form>
           </div>

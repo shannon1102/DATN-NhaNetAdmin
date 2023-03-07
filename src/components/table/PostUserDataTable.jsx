@@ -62,7 +62,7 @@ const PostUserDatatable = ({columns}) => {
     <div className="datatable">
       <div className="datatableTitle">
         posts
-        <Link to={`/post/new`} className="link">
+        <Link to={`/posts/new`} className="link">
           Thêm mới
         </Link>
       </div>

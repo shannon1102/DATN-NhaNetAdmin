@@ -7,6 +7,7 @@ import { postInputs } from "../../formSource";
 import useFetch from "../../hooks/useFetch";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const NewPost = () => {
   const { user } = useContext(AuthContext);
@@ -16,51 +17,52 @@ const NewPost = () => {
     },
   };
   opts.headers.Authorization = "Bearer " + user.token;
+
+  const fileOpts = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  fileOpts.headers.Authorization = "Bearer " + user.token;
+
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
-  const [posts, setPosts] = useState([]);
-  const { data, loading, error } = useFetch(`${process.env.REACT_APP_BASE_URL}/posts`,opts);
 
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleSelect = (e) => {
-    const value = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    setPosts(value);
-  };
-  
-  console.log(files)
+  console.log(files);
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
+      const fileArr = Array.from(files);
       const list = await Promise.all(
-        Object.values(files).map(async (file) => {
+        fileArr.map(async (file) => {
           const data = new FormData();
-          data.append("file", file);
-          data.append("upload_preset", "upload");
-          const uploadRes = await axios.post(
-            "https://api.cloudinary.com/v1_1/lamadev/image/upload",
-            data
-          );
+          data.append("files", file);
+          const uploadRes = await axios.post(`${process.env.REACT_APP_MEDIA_URL}`,data, fileOpts);
 
-          const { url } = uploadRes.data;
-          return url;
+          const mediaId = uploadRes.data.result[0].id;
+          return mediaId;
         })
       );
+      console.log("??????????")
 
       const newPost = {
         ...info,
-        posts,
-        photos: list,
+        media: list,
       };
 
-      await axios.post("/posts", newPost);
-    } catch (err) {console.log(err)}
+      console.log("??????wewee????",newPost,process.env.REACT_APP_BASE_URL)
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/posts`, newPost, opts);
+      console.log("OIIIIIIIIIIIIIII??????????")
+      navigate("/posts");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="new">
@@ -107,7 +109,7 @@ const NewPost = () => {
                   />
                 </div>
               ))}
-              <div className="formInput">
+              {/* <div className="formInput">
                 <label>Featured</label>
                 <select id="featured" onChange={handleChange}>
                   <option value={false}>No</option>
@@ -126,7 +128,7 @@ const NewPost = () => {
                         </option>
                       ))}
                 </select>
-              </div>
+              </div> */}
               <button onClick={handleClick}>Send</button>
             </form>
           </div>

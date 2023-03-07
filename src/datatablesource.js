@@ -114,22 +114,22 @@ export const postColumns = [
   },
   {
     field: "description",
-    headerName: "Description",
+    headerName: "Mô tả",
     width: 500,
   },
   {
     field: "createdAt",
-    headerName: "createdAt",
+    headerName: "Ngày đăng",
     width: 100,
   },
   {
     field: "like",
-    headerName: "Num of likes",
+    headerName: "Số like",
     width: 100,
   },
   {
     field: "userId",
-    headerName: "PosterID",
+    headerName: "ID Chủ bài viết",
     width: 400,
   },
 ];
@@ -138,47 +138,47 @@ export const depositColumns = [
   { field: "id", headerName: "ID", width: 70 },
   {
     field: "customerName",
-    headerName: "customerName",
+    headerName: "Tên người đặt cọc",
     width: 230,
   },
   {
     field: "customerEmail",
-    headerName: "customerEmail",
+    headerName: "Email người đặt cọc",
     width: 500,
   },
   {
     field: "customerPhone",
-    headerName: "customerPhone",
+    headerName: "Số điện thoại",
     width: 230,
   },
   {
     field: "customerAddress",
-    headerName: "customerAddress",
+    headerName: "Đại chỉ",
     width: 230,
   },
   {
     field: "paymentMethod",
-    headerName: "paymentMethod",
+    headerName: "Phương thức thanh toán",
     width: 230,
   },
   {
     field: "createdAt",
-    headerName: "createdAt",
+    headerName: "Ngày tạo",
     width: 100,
   },
   {
     field: "price",
-    headerName: "Amount",
+    headerName: "Số tiền đặt cọc",
     width: 100,
   },
   {
     field: "productId",
-    headerName: "productId",
+    headerName: "ID sản phẩm",
     width: 100,
   },
   {
     field: "status",
-    headerName: "Status",
+    headerName: "Trạng thái",
     width: 400,
   },
 ];
