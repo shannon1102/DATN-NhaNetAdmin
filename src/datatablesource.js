@@ -132,6 +132,15 @@ export const postColumns = [
     headerName: "ID Chủ bài viết",
     width: 400,
   },
+  {
+    field: "userName",
+    headerName: "Người đăng",
+    type: "text",
+    width:300,
+    renderCell: (params) => {
+      return <div className="rowitem">{params.row.user.name || ""}</div>;
+    },
+  },
 ];
 
 export const depositColumns = [
@@ -153,12 +162,7 @@ export const depositColumns = [
   },
   {
     field: "customerAddress",
-    headerName: "Đại chỉ",
-    width: 230,
-  },
-  {
-    field: "paymentMethod",
-    headerName: "Phương thức thanh toán",
+    headerName: "Địa chỉ",
     width: 230,
   },
   {
@@ -177,8 +181,22 @@ export const depositColumns = [
     width: 100,
   },
   {
-    field: "status",
-    headerName: "Trạng thái",
-    width: 400,
+    field: "ownerName",
+    headerName: "Người bán",
+    type: "text",
+    renderCell: (params) => {
+      return <div className="rowitem">{params.row.product.user.name}</div>;
+    },
+  },
+  {
+    field: "ownerPhone",
+    headerName: "SĐT người bán",
+    type: "text",
+
+    renderCell: (params) => {
+      return (
+        <div className="rowitem">{params.row.product.user?.phone || ""}</div>
+      );
+    },
   },
 ];
