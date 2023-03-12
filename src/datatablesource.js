@@ -185,7 +185,7 @@ export const depositColumns = [
     headerName: "Người bán",
     type: "text",
     renderCell: (params) => {
-      return <div className="rowitem">{params.row.product.user.name}</div>;
+      return <div className="rowitem">{params.row.product?.user?.name || ""}</div>;
     },
   },
   {
@@ -195,7 +195,7 @@ export const depositColumns = [
 
     renderCell: (params) => {
       return (
-        <div className="rowitem">{params.row.product.user?.phone || ""}</div>
+        <div className="rowitem">{params.row.product?.user?.phone || ""}</div>
       );
     },
   },

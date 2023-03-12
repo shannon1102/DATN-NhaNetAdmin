@@ -35,6 +35,7 @@ const NewProduct= () => {
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    console.log("MMMMMMMMM",info)
   };
 
   const handleSelect = (e) => {
@@ -48,6 +49,8 @@ const NewProduct= () => {
   console.log(files)
 
   const handleClick = async (e) => {
+
+    console.log("Inforrrrrrrrrr",info);
     e.preventDefault();
     try {
       const list = await Promise.all(
