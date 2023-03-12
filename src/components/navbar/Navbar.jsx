@@ -58,7 +58,7 @@ const Navbar = () => {
           </div> */}
           <div className="item">
             <img
-              src={`${process.env.REACT_APP_MEDIA_URL}/${user.avatar}`}
+              src={`${process.env.REACT_APP_MEDIA_URL}/${user.avatar ||2}`}
               alt=""
               className="avatar"
             />
